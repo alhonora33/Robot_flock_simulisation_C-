@@ -2,7 +2,7 @@
 #define TASK_HPP
 
 #include "graph.hpp"
-
+#include <string>
 namespace task
 {
     enum class TaskStatus
@@ -28,6 +28,9 @@ namespace task
         // Setters for task status and assigned robot ID
         void setStatus(TaskStatus status) noexcept;
         void setAssignedRobotId(int robot_id) noexcept;
+
+        // Method to convert Task data to a JSON string representation
+        std::string getToJson() const noexcept;
 
     private:
         const int _id;           // Unique identifier for the task

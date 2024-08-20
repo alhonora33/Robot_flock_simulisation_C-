@@ -8,6 +8,7 @@
 #include <atomic>
 #include <condition_variable>
 #include <functional>
+#include <string>
 
 #define NO_TASK_WAIT_TIME 100 // Check for new tasks every 0.1 second if no tasks are available
 
@@ -47,6 +48,9 @@ namespace robot
 
         // Executes tasks in the robot's task queue
         void executeTasks() noexcept;
+
+        // Method to get a JSON representation of the robot's state
+        std::string getToJson() noexcept;
 
     private:
         int _id; // Unique identifier for the robot

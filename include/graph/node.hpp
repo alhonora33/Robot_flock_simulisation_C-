@@ -1,6 +1,8 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+#include <string>
+
 namespace graph
 {
     enum class Property
@@ -21,6 +23,9 @@ namespace graph
         int getX() const noexcept;
         int getY() const noexcept;
         Property getProperty() const noexcept;
+
+        // Methode to convert Node data to a JSON string representation
+        std::string getToJson() const noexcept;
 
     private:
         const int _id;

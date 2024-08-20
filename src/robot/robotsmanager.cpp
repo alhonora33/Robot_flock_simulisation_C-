@@ -1,5 +1,6 @@
 #include "robotsmanager.hpp"
 #include <chrono>
+#include <sstream>
 
 namespace robot
 {
@@ -97,4 +98,24 @@ namespace robot
             robot->stop(); // Safely stop each robot
         }
     }
+
+    std::string RobotsManager::getToJson() const noexcept
+    {
+        std::ostringstream json;
+        json << "{\n\"robots\": [\n";
+
+        for (std::size_t i = 0; i < _robots.size(); ++i)
+        {
+            json << _robots[i]->getToJson();
+            if (i < _robots.size() - 1) // Add a comma unless it's the last element in the list
+            {
+                json << ",";
+            }
+            json << "\n";
+        }
+
+        json << "]\n}\n";
+        return json.str();
+    }
+
 } // namespace robot

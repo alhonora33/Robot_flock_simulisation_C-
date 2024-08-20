@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <queue>
+#include <sstream>
 namespace graph
 {
   // Clears the nodes and edges of the graph
@@ -121,6 +122,46 @@ namespace graph
   {
     _edges[i][j] = 1;
     _edges[j][i] = 1;
+  }
+
+  // Converts the graph to a JSON string representation
+  std::string Graph::getToJson() const noexcept
+  {
+    std::ostringstream json;
+
+    json << "{\n\"nodes\": [\n";
+
+    for (std::size_t i = 0; i < _nodes.size(); ++i)
+    {
+      json << _nodes[i]->getToJson();
+      if (i < _nodes.size() - 1) // Add a comma unless it's the last element
+      {
+        json << ",";
+      }
+      json << "\n";
+    }
+
+    json << "],\n\"edges\": [\n";
+    bool first_edge = true;
+
+    for (std::size_t i = 0; i < _edges.size(); ++i)
+    {
+      for (std::size_t j = 0; j < _edges[i].size(); ++j)
+      {
+        if (_edges[i][j] == 1)
+        {
+          if (!first_edge)
+          {
+            json << ",";
+          }
+          first_edge = false;
+          json << "{\"n1\": " << i << ", \"n2\": " << j << "}\n";
+        }
+      }
+    }
+
+    json << "]\n}";
+    return json.str();
   }
 
 } // namespace graph

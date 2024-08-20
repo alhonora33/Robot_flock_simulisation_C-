@@ -4,6 +4,7 @@
 #include "node.hpp"
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace graph
 {
@@ -27,6 +28,9 @@ namespace graph
 
         // Clears the graph
         void clear() noexcept;
+
+        // Method to get the JSON representation of the graph
+        std::string getToJson() const noexcept;
 
     protected:
         // Adds a node to the graph

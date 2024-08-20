@@ -1,5 +1,6 @@
 #include "robot.hpp"
 #include <cmath>
+#include <sstream>
 namespace robot
 {
     // Constructor
@@ -115,6 +116,20 @@ namespace robot
         {
             executeTasks(); // Continuously execute tasks
         }
+    }
+
+    // Convert robot's state to JSON format
+    std::string Robot::getToJson() const noexcept
+    {
+        std::ostringstream json;
+        json << "{\n";
+        json << "\"id\": " << _id << ",\n";
+        json << "\"x\": " << _x.load() << ",\n";
+        json << "\"y\": " << _y.load() << ",\n";
+        json << "\"battery\": " << _battery.load() << ",\n";
+        json << "\"angle\": " << _angle.load() << "\n";
+        json << "}";
+        return json.str();
     }
 
 } // namespace robot

@@ -1,4 +1,5 @@
 #include "tasksmanager.hpp"
+#include <sstream>
 
 namespace task
 {
@@ -35,6 +36,27 @@ namespace task
     void TasksManager::clear() noexcept
     {
         _tasks.clear();
+    }
+
+    // Returns a JSON string with all tasks
+    std::string TasksManager::getToJson() const noexcept
+    {
+        std::ostringstream json;
+
+        json << "{\n\"tasks\": [\n";
+
+        for (std::size_t i = 0; i < _tasks.size(); ++i)
+        {
+            json << _tasks[i].getToJson();
+            if (i < _tasks.size() - 1) // Add a comma unless it's the last element
+            {
+                json << ",";
+            }
+            json << "\n";
+        }
+
+        json << "]\n}";
+        return json.str();
     }
 
 } // namespace task

@@ -6,6 +6,7 @@
 #include "tasksmanager.hpp"
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace robot
 {
@@ -26,6 +27,9 @@ namespace robot
 
         // Stops all robots in the manager
         void stopAllRobots() noexcept;
+
+        // Method to get a JSON representation of the robots
+        std::string getToJson() const noexcept;
 
     private:
         std::shared_ptr<graph::Graph> _graph; // Shared pointer to the graph object

@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include <sstream>
 
 namespace graph
 {
@@ -30,6 +31,41 @@ namespace graph
     Property Node::getProperty() const noexcept
     {
         return _prop;
+    }
+
+    // Method to convert Node data to a JSON string representation
+    std::string Node::getToJson() const noexcept
+    {
+        // Using std::ostringstream for efficient string concatenation
+        std::ostringstream json;
+        json << "{\n";
+        json << "\"id\": " << _id << ",\n";
+        json << "\"x\": " << _x << ",\n";
+        json << "\"y\": " << _y << ",\n";
+        json << "\"p\": ";
+
+        // Convert enum Property to its corresponding string representation
+        switch (_prop)
+        {
+        case Property::node:
+            json << "\"node\"";
+            break;
+        case Property::pickdrop:
+            json << "\"pickdrop\"";
+            break;
+        case Property::waiting:
+            json << "\"waiting\"";
+            break;
+        case Property::charging:
+            json << "\"charging\"";
+            break;
+        default:
+            json << "\"unknown\""; // This should never happen, added for safety
+            break;
+        }
+
+        json << "\n}";
+        return json.str();
     }
 
 } // namespace graph

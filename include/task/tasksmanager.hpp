@@ -4,6 +4,7 @@
 #include "task.hpp"
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace task
 {
@@ -21,6 +22,9 @@ namespace task
 
         // Clears all tasks
         void clear() noexcept;
+
+        // Method to get the JSON representation of the tasks
+        std::string getToJson() const noexcept;
 
     private:
         std::vector<Task> _tasks;             // Vector holding all tasks
