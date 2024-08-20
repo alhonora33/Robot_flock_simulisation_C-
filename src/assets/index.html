@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Optimiser Coalescent Mobile Robotics</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="L'Honoré Antoine">
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+
+    <script src="scripts/fetchservice.js" defer></script>
+    <script src="scripts/index.js" defer></script>
+    <script src="https://unpkg.com/cytoscape@latest/dist/cytoscape.min.js"></script>
+    <script src="scripts/graph.js" defer></script>
+    <script src="scripts/graphcontrols.js" defer></script>
+    <script src="scripts/robotscontrols.js" defer></script>
+    <script src="scripts/graphinfos.js" defer></script>
+    <script src="scripts/taskscontrols.js" defer></script>
+    <script src="scripts/tasks.js" defer></script>
+    <script src="scripts/robotsinfos.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h2>Optimiser Coalescent Mobile Robotics</h2>
+        <div id="server_controls">
+            <button id="stop_button">Stop</button>
+            <button id="start_button">Start</button>
+        </div>
+    </header>
+    <main>
+        <div class="side">
+            <div id="graph_controls" class="control">
+                <h3>Generate Random Graph</h3>
+                <form id="graph_form">
+                    <label for="num_node">Number of Nodes:</label>
+                    <input type="number" id="num_node" name="num_node" value="0" min="0" required><br><br>
+
+                    <label for="num_waiting">Number of Waiting:</label>
+                    <input type="number" id="num_waiting" name="num_waiting" value="0" min="0" required><br><br>
+
+                    <label for="num_charging">Number of Charging:</label>
+                    <input type="number" id="num_charging" name="num_charging" value="0" min="0" required><br><br>
+
+                    <label for="num_pickdrop">Number of PickDrop:</label>
+                    <input type="number" id="num_pickdrop" name="num_pickdrop" value="0" min="0" required><br><br>
+                </form>
+
+                <button id="generate_button">Generate</button>
+                <button id="lock_button">Lock Graph</button>
+            </div>
+
+            <div id="robots_controls" class="control">
+                <h3>Robots Manager</h3>
+                <button id="add_robot_button">Add Robot</button>
+                <button id="clear_robots_button">Clear Robots</button>
+            </div>
+
+            <div id="tasks_controls" class="control">
+                <h3>Tasks Manager</h3>
+                <form id="tasks_form">
+                    <label for="num_tasks">Number of Tasks:</label>
+                    <input type="number" id="num_tasks" name="num_tasks" value="0" min="0" required><br><br>
+                </form>
+                <button id="generate_tasks_button">Generate</button>
+            </div>
+        </div>
+
+        <div class="centre">
+            <div id="graph">
+            </div>
+
+            <div id="tasks">
+                <table id="tasks_table">
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Pick Node</th>
+                            <th>Drop Node</th>
+                            <th>Status</th>
+                            <th>Assigned Robot</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasks_body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="side">
+            <div id="graph_details" class="infos">
+                <h3>Graph Details</h3>
+                <ul>
+                    <li><strong>Number of Nodes:</strong> <span id="num_nodes">0</span></li>
+                    <li><strong>Number of Waiting:</strong> <span id="num_wait">0</span></li>
+                    <li><strong>Number of Charging:</strong> <span id="num_charg">0</span></li>
+                    <li><strong>Number of Pick & Drop:</strong> <span id="num_pick_drop">0</span></li>
+                </ul>
+            </div>
+
+            <div id="robots_details" class="infos">
+                <h3>Robots Details</h3>
+                <div id="robots_info">
+                    <!-- Robot details will be populated here -->
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -14,6 +14,8 @@ configure:
 # Build the project
 build:
 	cd $(BUILD_DIR) && cmake --build . --target $(TARGET) -- -j 6
+	cp -r src/assets $(BUILD_DIR)/src
+
 
 # Build the tests
 build-test:
