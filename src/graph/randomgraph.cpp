@@ -18,21 +18,6 @@ namespace graph
         clear();                  // Clear the graph
     }
 
-    // Retrieves the node at the specified (x, y) coordinates
-    int RandomGraph::_getNodeAt(int x, int y) const noexcept
-    {
-        auto it = std::find_if(_nodes.cbegin(), _nodes.cend(),
-                               [x, y](const std::unique_ptr<Node> &node)
-                               {
-                                   return node->getX() == x && node->getY() == y;
-                               });
-        if (it != _nodes.cend())
-        {
-            return std::distance(_nodes.cbegin(), it);
-        }
-        return -1;
-    }
-
     // Resets the array that tracks tested directions
     inline void RandomGraph::_clearTestedDirections() noexcept
     {
@@ -105,7 +90,7 @@ namespace graph
                     auto [prev_x, prev_y] = _getNewCoordinates(getNode(_current_node).getX(), getNode(_current_node).getY(), static_cast<Direction>(_from_direction));
                     _clearTestedDirections();
                     _tested_directions[(_from_direction + 2) % 4] = true; // Mark the opposite direction as tested
-                    _current_node = _getNodeAt(prev_x, prev_y);
+                    _current_node = getNodeAt(prev_x, prev_y);
                     _from_direction = -1;
                     continue;
                 }
@@ -125,7 +110,7 @@ namespace graph
             _tested_directions[new_direction] = true;
             auto [new_x, new_y] = _getNewCoordinates(getNode(_current_node).getX(), getNode(_current_node).getY(), static_cast<Direction>(new_direction));
 
-            int node = _getNodeAt(new_x, new_y);
+            int node = getNodeAt(new_x, new_y);
 
             if (node == -1) // No node exists at new coordinates, create one
             {
