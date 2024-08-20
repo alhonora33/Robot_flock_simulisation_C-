@@ -84,7 +84,7 @@ namespace graph
         _num_node--;
         Graph::addEdge(0, 1);
 
-        _current_node = 1; // Set the current node to the first normal node
+        _current_node = 1;                                            // Set the current node to the first normal node
         _tested_directions[static_cast<int>(Direction::down)] = true; // Mark the direction down as tested
         _from_direction = -1;
 
