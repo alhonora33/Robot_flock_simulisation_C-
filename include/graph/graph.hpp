@@ -16,7 +16,6 @@ namespace graph
         // Checks if there's an edge between nodes i and j
         int isEdge(int i, int j) const noexcept;
 
-   
         // Adds a node to the graph
         void addNode(int id, int x, int y, const Property &prop) noexcept;
 
@@ -26,9 +25,11 @@ namespace graph
         // Clears the graph
         void clear() noexcept;
 
+    protected:
+        std::vector<std::unique_ptr<Node>> _nodes; // Vector holding all nodes, needs to be protected for derived classes
+
     private:
-        std::vector<std::unique_ptr<Node>> _nodes; // Vector holding all nodes
-        std::vector<std::vector<int>> _edges;      // Adjacency matrix representing edges
+        std::vector<std::vector<int>> _edges; // Adjacency matrix representing edges
     };
 } // namespace graph
 
