@@ -76,13 +76,13 @@ namespace graph
         _clearTestedDirections(); // Clear tested directions
 
         // Initialize the first pickdrop node
-        Graph::addNode(_id_node++, 0, 0, Property::pickdrop);
+        _addNode(_id_node++, 0, 0, Property::pickdrop);
         _num_pickdrop--;
 
         // Initialize the first normal node and edge
-        Graph::addNode(_id_node++, 0, SCALE, Property::node);
+        _addNode(_id_node++, 0, SCALE, Property::node);
         _num_node--;
-        Graph::addEdge(0, 1);
+        _addEdge(0, 1);
 
         _current_node = 1;                                            // Set the current node to the first normal node
         _tested_directions[static_cast<int>(Direction::down)] = true; // Mark the direction down as tested
@@ -135,16 +135,16 @@ namespace graph
                 {
                     if (_num_node == 1) // Last normal node, create a pickdrop node
                     {
-                        addNode(_id_node++, new_x, new_y, Property::pickdrop);
+                        _addNode(_id_node++, new_x, new_y, Property::pickdrop);
                         _num_node--;
-                        addEdge(_current_node, _id_node - 1);
+                        _addEdge(_current_node, _id_node - 1);
                         break; // No more nodes to create
                     }
                     else // Create a normal node
                     {
-                        addNode(_id_node++, new_x, new_y, Property::node);
+                        _addNode(_id_node++, new_x, new_y, Property::node);
                         _num_node--;
-                        addEdge(_current_node, _id_node - 1);
+                        _addEdge(_current_node, _id_node - 1);
                         _current_node = _id_node - 1;
                         _from_direction = (new_direction + 2) % 4;
                         _clearTestedDirections();
@@ -153,21 +153,21 @@ namespace graph
                 }
                 else if (r < _num_node + _num_charging) // Create a charging node
                 {
-                    addNode(_id_node++, new_x, new_y, Property::charging);
+                    _addNode(_id_node++, new_x, new_y, Property::charging);
                     _num_charging--;
-                    addEdge(_current_node, _id_node - 1);
+                    _addEdge(_current_node, _id_node - 1);
                 }
                 else if (r < _num_node + _num_charging + _num_waiting) // Create a waiting node
                 {
-                    addNode(_id_node++, new_x, new_y, Property::waiting);
+                    _addNode(_id_node++, new_x, new_y, Property::waiting);
                     _num_waiting--;
-                    addEdge(_current_node, _id_node - 1);
+                    _addEdge(_current_node, _id_node - 1);
                 }
                 else // Create a pickdrop node
                 {
-                    addNode(_id_node++, new_x, new_y, Property::pickdrop);
+                    _addNode(_id_node++, new_x, new_y, Property::pickdrop);
                     _num_pickdrop--;
-                    addEdge(_current_node, _id_node - 1);
+                    _addEdge(_current_node, _id_node - 1);
                 }
             }
             else // Node exists at new coordinates
@@ -182,7 +182,7 @@ namespace graph
                 else if (getNode(node).getProperty() == Property::node && isEdge(_current_node, node) == 0) // Node is a normal node but is not connected
                 {
                     if (!(std::rand() % CONNECTIVITY))
-                        addEdge(_current_node, node);
+                        _addEdge(_current_node, node);
                     _tested_directions[new_direction] = true;
                 }
                 else // Node is not a normal node
