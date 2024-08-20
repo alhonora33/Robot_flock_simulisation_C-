@@ -50,7 +50,7 @@ namespace robot
         void executeTasks() noexcept;
 
         // Method to get a JSON representation of the robot's state
-        std::string getToJson() noexcept;
+        std::string getToJson() const noexcept;
 
     private:
         int _id; // Unique identifier for the robot
