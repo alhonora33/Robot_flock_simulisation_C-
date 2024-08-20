@@ -25,9 +25,9 @@ namespace graph
   // Returns a random pick-drop node index
   int Graph::getRandomPickDrop() const noexcept
   {
-    if (_pickdropNodes.empty())
+    if (_pickdropNodes.size() < 2)
     {
-      return 0; // Return 0 if no pick-drop node is found
+      return -1; // Return -1 if there are less than 2 pick-drop nodes
     }
 
     std::random_device rd; // Random seed
