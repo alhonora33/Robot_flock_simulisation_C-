@@ -5,7 +5,7 @@ namespace robot
 {
     // Constructor
     Robot::Robot(int id, int x, int y) noexcept
-        : _id(id), _x(x), _y(y), _battery(100.0f), _angle(0.0f), _running(false)
+        : _id(id), _x(x), _y(y), _battery(100.0f), _angle(0.0f), _running(true)
     {
         _worker_thread = std::thread(&Robot::_workerFunction, this); // Start the worker thread
     }
