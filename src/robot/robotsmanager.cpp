@@ -82,12 +82,9 @@ namespace robot
                     // Instruct the robot to mark the task as completed
                     robot->markTaskDone(pending_task);
 
-                    break; // Stop searching for a robot after assigning the task
+                    break; // Exit the loop after assigning the task
                 }
             }
-
-            // Wait a bit before checking for new tasks
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
 
