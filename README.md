@@ -86,3 +86,13 @@ Once you have opened the UI in your browser, follow these steps:
 
 - **Task Assignment Logic:** Refine the task assignment logic within the `robot_manager` to more tightly control how tasks are allocated to robots. This may involve prioritizing tasks based on robot status, battery levels, or proximity to task locations, ensuring that tasks are distributed in a way that optimizes overall efficiency and avoids overloading individual robots.
 
+### Areas you can improve on
+- Do getters and setters only when it is necessary (when you actually do stuff related to the variable you get/set). We have nicer ways of dealing with read only/ read write variables in C++ classes than wrapping every private variable with a getter and a setter.
+- Sanity checks where needed (when you add an edge to the graph, you need to make sure that the node indices exist, and when you add a node, the node index shouldn't already exist)
+- Throw custom errors so that you understand what went wrong when crashing - (e.g: index out of bound when adding an edge)
+- Focus more on maintainability of the code. Think about, how easy it would be to change / add/ replace something in your code in the future (e.g: directions in your RandomGraph works only as long as you have graph nodes to left/right/up/down with one unit length edges)
+- Prefer composition over inheritance (e.g: RandomGraph is better be a separate class called RandomTraverser inherited from a GraphTraverser base class, that takes a Graph instance and utilizes it)
+- Premature abstraction is the root of most evil - try to find a balance between what you want right now and what you are going to do in the future, and do not over-engineer (or overthink). It will always make everyone's lives harder including yourself, when you/someone later want to maintain your code. (this does not apply much to this final code, but I wanted to mention it here since you were going on that path initially when you were planning)
+- Do not reinvent the wheel, unless your wheel is going to be reinvented fast enough, and is going to have a high impact on your final product's performance
+
+
